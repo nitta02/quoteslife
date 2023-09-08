@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:quoteslife/services/splash_services.dart';
 import 'package:quoteslife/widgets/custom_text.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -9,6 +10,12 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  @override
+  void initState() {
+    super.initState();
+    SplashServices().splashServices(context);
+  }
+
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(

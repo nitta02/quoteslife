@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: Color(0xDEEDD19E),
           textTheme: CupertinoTextThemeData(
               textStyle: TextStyle(
-            fontFamily: 'Kanit-Bold',
+            fontFamily: 'Kanit',
           ))),
       home: SplashScreen(),
     );
