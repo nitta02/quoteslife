@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:quoteslife/widgets/custom_text.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -22,6 +23,13 @@ class _SplashScreenState extends State<SplashScreen> {
               height: 100,
               width: 100,
             ),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          CustomText(
+            texxt: 'QuotesLife',
+            fontSize: 20,
           )
         ],
       ),

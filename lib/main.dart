@@ -13,9 +13,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return CupertinoApp(
       debugShowCheckedModeBanner: false,
+      title: 'Quotes Life',
       theme: CupertinoThemeData(
-        scaffoldBackgroundColor: Color(0xDEEDD19E),
-      ),
+          scaffoldBackgroundColor: Color(0xDEEDD19E),
+          textTheme: CupertinoTextThemeData(
+              textStyle: TextStyle(
+            fontFamily: 'Kanit-Bold',
+          ))),
       home: SplashScreen(),
     );
   }
