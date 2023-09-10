@@ -33,6 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               CupertinoButton(
                 onPressed: () {
+                  print('Tapped');
                   // Call the function to fetch a random quote from the API
                 },
                 child: const Text(
