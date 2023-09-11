@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:quoteslife/screens/splash_screen.dart';
 
 void main() {
@@ -10,16 +10,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const CupertinoApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Quotes Life',
-      theme: CupertinoThemeData(
-          scaffoldBackgroundColor: Color(0xDEEDD19E),
-          textTheme: CupertinoTextThemeData(
-              textStyle: TextStyle(
-            fontFamily: 'Kanit',
-          ))),
-      home: SplashScreen(),
+      theme: ThemeData(
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Color.fromARGB(222, 201, 173, 122),
+          elevation: 0.0,
+        ),
+        scaffoldBackgroundColor: const Color(0xDEEDD19E),
+        fontFamily: 'Kanit',
+      ),
+      home: const SplashScreen(),
     );
   }
 }
