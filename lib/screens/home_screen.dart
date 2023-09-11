@@ -1,3 +1,5 @@
+// ignore_for_file: sized_box_for_whitespace
+
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:quoteslife/model/api_model.dart';
@@ -30,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      drawer: DrawerScreen(),
+      drawer: const DrawerScreen(),
       body: FutureBuilder(
         future: getData(),
         builder: (context, snapshot) {

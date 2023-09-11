@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:quoteslife/services/splash_services.dart';
 import 'package:quoteslife/widgets/custom_text.dart';
