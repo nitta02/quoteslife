@@ -1,5 +1,8 @@
-import 'package:flutter/cupertino.dart';
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:quoteslife/model/api_model.dart';
+import 'package:http/http.dart' as http;
+import 'package:quoteslife/screens/quotes_details.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -10,41 +13,93 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   String quote = "Tap the button to get a quote.";
+  List<QuotesApi> appList = [];
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoPageScaffold(
-      child: SafeArea(
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Text(
-                  quote,
-                  style: const TextStyle(
-                    fontSize: 18.0,
-                    color: Colors.black,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-              ),
-              CupertinoButton(
-                onPressed: () {
-                  print('Tapped');
-                  // Call the function to fetch a random quote from the API
-                },
-                child: const Text(
-                  'Get a Quote',
-                  style: TextStyle(fontSize: 20.0),
-                ),
-              ),
-            ],
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          'QuotesLIFE',
+          style: TextStyle(
+            fontSize: 20,
+            color: Colors.black,
           ),
         ),
+        automaticallyImplyLeading: false,
+      ),
+      body: FutureBuilder(
+        future: getData(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return ListView.builder(
+              itemCount: appList.length,
+              itemBuilder: (context, index) {
+                return Card(
+                  margin: const EdgeInsets.all(10.0),
+                  shadowColor: Colors.black45,
+                  child: ListTile(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => QuoteDetailScreen(
+                                q: appList[index].q, a: appList[index].a),
+                          ));
+                    },
+                    leading: const Icon(
+                      Icons.read_more_outlined,
+                      size: 30,
+                    ),
+                    title: Text(
+                      appList[index].a,
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),
+                    ),
+                    subtitle: Container(
+                        padding: const EdgeInsets.all(10.0),
+                        height: 70,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5.0),
+                        ),
+                        child: Center(
+                            child: Text(
+                          appList[index].q,
+                          style: const TextStyle(
+                            color: Colors.black54,
+                            fontWeight: FontWeight.w300,
+                            fontSize: 15,
+                          ),
+                        ))),
+                  ),
+                );
+              },
+            );
+          } else {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+        },
       ),
     );
+  }
+
+  Future<List<QuotesApi>> getData() async {
+    final response =
+        await http.get(Uri.parse('https://zenquotes.io/api/quotes'));
+    var data = json.decode(response.body.toString());
+
+    if (response.statusCode == 200) {
+      for (Map<String, dynamic> index in data) {
+        appList.add(QuotesApi.fromJson(index));
+      }
+      return appList;
+    } else {
+      return appList;
+    }
   }
 }
